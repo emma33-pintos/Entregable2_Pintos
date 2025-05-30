@@ -18,18 +18,38 @@ const mensajesApoyoEmocional = [
     "Es normal sentirte así a veces. Permítete procesarlo con calma.",
     "Recuerda que pedir ayuda es un signo de valentía, no de debilidad."
 ];
-
-const preguntas = [
-    "¿Cómo te sientes hoy? (bien/mal)",
-    "¿Qué tipo de mensaje te gustaría recibir? (motivación/aceptación/apoyo)"
-];
-
+function validarEntrada(texto) {
+    return texto && texto.trim().length > 0;
+}
+function normalizarTexto(texto) {
+    return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
+}
 function iniciarSimulador() {
-    let nombre = prompt("Por favor, ingresa tu nombre:");
-    let apellido = prompt("Ahora, ingresa tu apellido:");
-    alert(`Bienvenido, ${nombre} ${apellido}. Vamos a comenzar.`);
+    let nombre, apellido;
+    do {
+        nombre = prompt("Por favor, ingresa tu nombre:");
+        if (!validarEntrada(nombre)) {
+            alert("El nombre no puede estar vacío. Inténtalo de nuevo.");
+        }
+    } while (!validarEntrada(nombre));
 
-    let estadoAnimo = prompt(preguntas[0]).toLowerCase();
+    do {
+        apellido = prompt("Ahora, ingresa tu apellido:");
+        if (!validarEntrada(apellido)) {
+            alert("El apellido no puede estar vacío. Inténtalo de nuevo.");
+        }
+    } while (!validarEntrada(apellido));
+
+    alert(`Bienvenido, ${nombre} ${apellido}. Vamos a comenzar :D.`);
+
+    let estadoAnimo;
+    do {
+        estadoAnimo = normalizarTexto(prompt("¿Cómo te sientes hoy? (bien/mal)"));
+        if (!validarEntrada(estadoAnimo) || (estadoAnimo !== "bien" && estadoAnimo !== "mal")) {
+            alert("Por favor, ingresa 'bien' o 'mal' para continuar.");
+        }
+    } while (estadoAnimo !== "bien" && estadoAnimo !== "mal");
+
     if (estadoAnimo === "mal") {
         alert("Recuerda que es importante acudir a un profesional.");
     }
@@ -37,17 +57,22 @@ function iniciarSimulador() {
     let continuar = true;
 
     while (continuar) {
-        let tipoMensaje = prompt(preguntas[1]).toLowerCase();
-        let mensajeFinal;
+        let tipoMensaje;
+        do {
+            tipoMensaje = normalizarTexto(prompt("¿Qué tipo de mensaje te gustaría recibir? (motivacion/aceptacion/apoyo)"));
+            if (!validarEntrada(tipoMensaje) || (!tipoMensaje.includes("motivacion") &&
+                 !tipoMensaje.includes("aceptacion") && !tipoMensaje.includes("apoyo"))) {
+                alert("Por favor, ingresa 'motivacion', 'aceptacion' o 'apoyo' para continuar.");
+            }
+        } while (!tipoMensaje.includes("motivacion") && !tipoMensaje.includes("aceptacion") && !tipoMensaje.includes("apoyo"));
 
-        if (tipoMensaje === "motivación") {
+        let mensajeFinal;
+        if (tipoMensaje.includes("motivacion")) {
             mensajeFinal = mensajesMotivadores[Math.floor(Math.random() * mensajesMotivadores.length)];
-        } else if (tipoMensaje === "aceptación") {
+        } else if (tipoMensaje.includes("aceptacion")) {
             mensajeFinal = mensajesAutoaceptacion[Math.floor(Math.random() * mensajesAutoaceptacion.length)];
-        } else if (tipoMensaje === "apoyo") {
+        } else if (tipoMensaje.includes("apoyo")) {
             mensajeFinal = mensajesApoyoEmocional[Math.floor(Math.random() * mensajesApoyoEmocional.length)];
-        } else {
-            mensajeFinal = "Opción no reconocida. Pero recuerda: eres valioso tal como eres.";
         }
 
         alert(mensajeFinal);
@@ -59,5 +84,4 @@ function iniciarSimulador() {
         }
     }
 }
-
 iniciarSimulador();
