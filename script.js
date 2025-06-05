@@ -1,3 +1,4 @@
+const usuariosRegistrados = [];
 const mensajesMotivadores = [
     "Eres valioso y fuerte. Sigue adelante.",
     "Cada paso cuenta. ¡Confía en ti!",
@@ -18,6 +19,12 @@ const mensajesApoyoEmocional = [
     "Es normal sentirte así a veces. Permítete procesarlo con calma.",
     "Recuerda que pedir ayuda es un signo de valentía, no de debilidad."
 ];
+
+function Usuario(nombre,apellido){
+    this.nombre = nombre;
+    this.apellido = apellido;
+}
+
 function validarEntrada(texto) {
     return texto && texto.trim().length > 0;
 }
@@ -39,6 +46,9 @@ function iniciarSimulador() {
             alert("El apellido no puede estar vacío. Inténtalo de nuevo.");
         }
     } while (!validarEntrada(apellido));
+
+    const nuevoUsuario = new Usuario(nombre, apellido);
+    usuarioRegistrado.push(nuevoUsuario);
 
     alert(`Bienvenido, ${nombre} ${apellido}. Vamos a comenzar :D.`);
 
@@ -83,5 +93,9 @@ function iniciarSimulador() {
             alert("¡Gracias por participar! Siempre recuerda tu valor. 💙");
         }
     }
+    alert("Lista de usuarios que han participado:");
+    usuariosRegistrados.forEach(usuario =>{
+        console.log(`Nombre: ${usuario.nombre}, Apellido: ${usuario.apellido}`);
+    });
 }
 iniciarSimulador();
