@@ -1,101 +1,47 @@
-const usuariosRegistrados = [];
-const mensajesMotivadores = [
-    "Eres valioso y fuerte. Sigue adelante.",
-    "Cada paso cuenta. ¡Confía en ti!",
-    "Tus emociones son válidas. Cuida de ti mismo.",
-    "Lo importante es que te permitas sentir y crecer."
-];
-
-const mensajesAutoaceptacion = [
-    "Eres suficiente tal como eres. No necesitas cambiar para encajar.",
-    "Tu identidad es válida y hermosa. Nunca dejes que nadie te haga dudar de ello.",
-    "El amor propio significa aceptarse sin miedo. Sé quien eres con orgullo.",
-    "No hay una única forma de ser feliz. Encuentra tu camino y abrázalo con confianza."
-];
-
-const mensajesApoyoEmocional = [
-    "No estás solo. Siempre hay alguien dispuesto a escucharte.",
-    "Hablar sobre tus sentimientos es un gran paso. Sigue adelante.",
-    "Es normal sentirte así a veces. Permítete procesarlo con calma.",
-    "Recuerda que pedir ayuda es un signo de valentía, no de debilidad."
-];
-
-function Usuario(nombre,apellido){
-    this.nombre = nombre;
-    this.apellido = apellido;
-}
-
-function validarEntrada(texto) {
-    return texto && texto.trim().length > 0;
-}
-function normalizarTexto(texto) {
-    return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
-}
-function iniciarSimulador() {
-    let nombre, apellido;
-    do {
-        nombre = prompt("Por favor, ingresa tu nombre:");
-        if (!validarEntrada(nombre)) {
-            alert("El nombre no puede estar vacío. Inténtalo de nuevo.");
-        }
-    } while (!validarEntrada(nombre));
-
-    do {
-        apellido = prompt("Ahora, ingresa tu apellido:");
-        if (!validarEntrada(apellido)) {
-            alert("El apellido no puede estar vacío. Inténtalo de nuevo.");
-        }
-    } while (!validarEntrada(apellido));
-
-    const nuevoUsuario = new Usuario(nombre, apellido);
-    usuarioRegistrado.push(nuevoUsuario);
-
-    alert(`Bienvenido, ${nombre} ${apellido}. Vamos a comenzar :D.`);
-
-    let estadoAnimo;
-    do {
-        estadoAnimo = normalizarTexto(prompt("¿Cómo te sientes hoy? (bien/mal)"));
-        if (!validarEntrada(estadoAnimo) || (estadoAnimo !== "bien" && estadoAnimo !== "mal")) {
-            alert("Por favor, ingresa 'bien' o 'mal' para continuar.");
-        }
-    } while (estadoAnimo !== "bien" && estadoAnimo !== "mal");
-
-    if (estadoAnimo === "mal") {
-        alert("Recuerda que es importante acudir a un profesional.");
+const mensajes= {
+    motivacion: [
+        "La vida es un viaje, no un destino.",
+        "Eres valioso y fuerte. Sigue adelante.",
+        "Cada paso cuenta. ¡CONFÍA EN VOS!",
+        "Tus emociones son válidas. Cuida de ti mismo.",
+        "Lo importante es que te permitas sentir y crecer.",
+    ] ,
+    aceptacion:[
+        "Eres suficiente tal como eres. No necesitas cambiar para encajar.",
+        "Tu identidad es válida y hermosa. Nunca dejes que nadie te haga dudar de ello.",
+        "El amor propio significa aceptarse sin miedo. Sé quien eres con orgullo.",
+        "No hay una única forma de ser feliz. Encuentra tu camino y abrázalo con confianza.",
+        "La diversidad es lo que hace al mundo hermoso. Celebra tu singularidad y la de los demás.",
+    ] ,
+    apoyo:[
+        "No estás solo. Siempre hay alguien dispuesto a escucharte.",
+        "Hablar sobre tus sentimientos es un gran paso. Sigue adelante.",
+        "Es normal sentirte así a veces. Permítete procesarlo con calma.",
+        "Recuer que pedir ayuda es un signo de valentía, no de debilidad.",
+        "La empatía y el apoyo mutuo son fundamentales. Estamos aquí para ti.",
+    ]
+} ;
+function obtenerMensaje(event){
+    event.preventDefault();
+    let nombre = document.getElementById("nombre").value.trim();
+    let apellido = document.getElementById("apellido").value.trim();
+    let estadoAnimo = document.getElementById("estadoAnimo").value;
+    let tipoMensaje = document.getElementById("tipoMensaje").value;
+    
+    if (!nombre || !apellido) {
+        alert("Por favor, completa tu nombre y apellido.");
+        return;
+    }
+    
+    if (estadoAnimo == "mal"){
+        alert("Recuerda que es importante acudir a un profesional. NO ESTAS SOLX.");
     }
 
-    let continuar = true;
-
-    while (continuar) {
-        let tipoMensaje;
-        do {
-            tipoMensaje = normalizarTexto(prompt("¿Qué tipo de mensaje te gustaría recibir? (motivacion/aceptacion/apoyo)"));
-            if (!validarEntrada(tipoMensaje) || (!tipoMensaje.includes("motivacion") &&
-                 !tipoMensaje.includes("aceptacion") && !tipoMensaje.includes("apoyo"))) {
-                alert("Por favor, ingresa 'motivacion', 'aceptacion' o 'apoyo' para continuar.");
-            }
-        } while (!tipoMensaje.includes("motivacion") && !tipoMensaje.includes("aceptacion") && !tipoMensaje.includes("apoyo"));
-
-        let mensajeFinal;
-        if (tipoMensaje.includes("motivacion")) {
-            mensajeFinal = mensajesMotivadores[Math.floor(Math.random() * mensajesMotivadores.length)];
-        } else if (tipoMensaje.includes("aceptacion")) {
-            mensajeFinal = mensajesAutoaceptacion[Math.floor(Math.random() * mensajesAutoaceptacion.length)];
-        } else if (tipoMensaje.includes("apoyo")) {
-            mensajeFinal = mensajesApoyoEmocional[Math.floor(Math.random() * mensajesApoyoEmocional.length)];
-        }
-
-        alert(mensajeFinal);
-
-        let respuesta = confirm("¿Quieres leer otro mensaje motivador?");
-        if (!respuesta) {
-            continuar = false;
-            alert("¡Gracias por participar! Siempre recuerda tu valor. 💙");
-        }
-    }
-    alert("Lista de usuarios que han participado:");
-    usuariosRegistrados.forEach(usuario =>{
-        console.log(`Nombre: ${usuario.nombre}, Apellido: ${usuario.apellido}`);
-    });
+    let mensajeFinal = mensajes[tipoMensaje][Math.floor(Math.random()* mensajes[tipoMensaje].length)];
+    document.getElementById("mensajeMotivador").textContent = `✨ ${mensajeFinal} ✨`;
+    let usuario = { nombre, apellido};
+    let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios") || []);
+    usuariosRegistrados.push(usuario);
+    localStorage.setItem ("usuarios", JSON.stringify(usuariosRegistrados));
 }
-iniciarSimulador();
+document.getElementById("simuladorForm").addEventListener("submit", obtenerMensaje);

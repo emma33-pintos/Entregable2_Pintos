@@ -16,6 +16,29 @@
         Eres un diamante que siempre brinda LUZ, Eres especial y fuerte, ya estas dando un gigantezco 
         paso al pedir ayuda y si mis mensajes te tocan, recorda que siempre es importante 
         asistir a un profesional si es necesario. </p>
+
+        <form id="simuladorForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+
+            <label for="estadoAnimo">¿Cómo te sientes hoy?</label>
+            <select id="estadoAnimo">
+                <option value="bien">Bien</option>
+                <option value="mal">Mal</option>
+            </select>
+
+            <label for="tipoMensaje">Elige un tipo de mensaje:</label>
+            <select id="tipoMensaje">
+                <option value="motivacion">Motivación</option>
+                <option value="apoyo">Apoyo emocional</option>
+                <option value="aceptacion">Autoaceptación</option>
+            </select>
+            <button type="submit">Mensaje de corazón</button>
+        </form>
+        <h2 id="mensajeMotivador"></h2>
     <script src="script.js"></script>
 </body>
 </html>
