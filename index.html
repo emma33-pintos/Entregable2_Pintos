@@ -19,12 +19,12 @@
         paso al pedir ayuda y si mis mensajes te tocan, recorda que siempre es importante 
         asistir a un profesional si es necesario. </p>
 
-        <form id="simuladorForm">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+        <img src="imagen/Ra.avif" alt="Ra, el gatito de apoyo emocional" class="imagenRa">
+        <h2 id="mensajeMotivador"></h2>
 
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" required>
+        <form id="simuladorForm">
+            <input type="text" id="nombre" placeholder="Tu nombre" required />
+            <input type="text" id="apellido" placeholder="Tu apellido" required />
 
             <label for="estadoAnimo">¿Cómo te sientes hoy?</label>
             <select id="estadoAnimo">
@@ -38,10 +38,28 @@
                 <option value="apoyo">Apoyo emocional</option>
                 <option value="aceptacion">Autoaceptación</option>
             </select>
+
+            <textarea id="mensajeUsuario" placeholder="Podes dejar tus palabras para alguien más aquí..." maxLength="5000"></textarea>
+            <input type="text" id="sobrenombre" placeholder="Tu sobrenombre(si lo deseas)">
+            <label>
+                <input type="checkbox" id="compartirMensaje"> Deseo compartir este mensaje públicamente.
+            </label>
             <button type="submit">Mensaje de corazón</button>
         </form>
-        <h2 id="mensajeMotivador"></h2>
-        <img src="imagen/Ra.avif" alt="Ra, el gatito de apoyo emocional" class="imagenRa">
+        <div id="historial">
+            <h2>Historial de Mensajes Motivacionales </h2>
+        </div>
+
+        <div id="mensajeDestacado">
+            <h2> Mensaje de nuestros diamantes</h2>
+        </div>
+        <div id="reproductorMusical">
+            <audio id="audioMensaje" autoplay></audio>
+        </div>
+
+        <button onclick="toggleModoOscuro()">🌙 Alternar Modo Oscuro </button>
+        
+        
     <script src="script.js"></script>
 </body>
 </html>
