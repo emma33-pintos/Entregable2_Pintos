@@ -41,25 +41,26 @@
 
             <textarea id="mensajeUsuario" placeholder="Podes dejar tus palabras para alguien más aquí..." maxLength="5000"></textarea>
             <input type="text" id="sobrenombre" placeholder="Tu sobrenombre(si lo deseas)">
-            <label>
-                <input type="checkbox" id="compartirMensaje"> Deseo compartir este mensaje públicamente.
+            <label for="compartirMensaje">
+                <input type="checkbox" id="compartirMensaje">
+                    Deseo compartir este mensaje públicamente.
             </label>
-            <button type="submit">Mensaje de corazón</button>
+            <button type="submit" aria-label="Enviar mensaje de corazón">Mensaje de corazón</button>
         </form>
         <div id="historial">
             <h2>Historial de Mensajes Motivacionales </h2>
         </div>
 
-        <div id="mensajeDestacado">
+        <div id="mensajesDestacados">
             <h2> Mensaje de nuestros diamantes</h2>
         </div>
         <div id="reproductorMusical">
-            <audio id="audioMensaje" autoplay></audio>
+            <audio id="audioMensaje" controls></audio>
         </div>
 
-        <button onclick="toggleModoOscuro()">🌙 Alternar Modo Oscuro </button>
+        <button onclick="toggleModoOscuro()" aria-label="Alternar modo oscuro">🌙 Alternar Modo Oscuro </button>
         
         
-    <script src="script.js"></script>
+     <script src="script.js"></script>
 </body>
 </html>

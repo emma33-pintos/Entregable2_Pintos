@@ -38,8 +38,8 @@ input,select,textarea{
     padding: 8px;
     border-radius: 5px;
     border: 2px solid #4a4a4a;
-    width: 90%;
-    max-width: 400px;
+    width: 80%;
+    max-width: 350px;
 }
 button {
     background-color: #4a4a4a;
@@ -59,7 +59,7 @@ button:hover{
     background-color: #222;
     color: #fff;
 }
-.mensaje-historial, .mensaje-destacado{
+.mensaje-historial {
     margin: 20px auto;
     padding: 15px;
     border-left: 4px solid #ffd700;
@@ -67,4 +67,26 @@ button:hover{
     width: 90%;
     max-width: 600px;
     border-radius: 8px;
+}
+.dark-mode .mensaje-historial {
+    background: #333;
+    color: #fff;
+    border-left: 4px solid #ffd700;
+}
+label input[type="checkbox"] {
+    vertical-align: baseline;
+    margin-right: 8px;
+}
+.mensaje-destacado {
+    border: 2px solid #ffd700;
+    background: #fffbe7;
+    box-shadow: 0 0 10px #ffd70055;
+    margin-top: 20px;
+    padding: 20px;
+    font-size: 18px;
+}
+.dark-mode .mensaje-destacado {
+    background: #444;
+    color: #ffd700;
+    border: 2px solid #ffd700;
 }

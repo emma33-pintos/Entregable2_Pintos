@@ -31,13 +31,16 @@ function mostrarMensajeConZoom(texto){
 function actualizarReproductorMusical(categoria) {
     const audioElement = document.getElementById("audioMensaje");
     const canciones = {
-        motivacion: "Audios/Sia-Unstoppable.mp3",
-        aceptacion: "Audios/Melody-Esa-Diva.mp3",
-        apoyo: "Audios/ZAZ-Cerca-de-ti.mp3"
+        motivacion: "Audios/Sia - Unstoppable (Official Audio).mp3",
+        aceptacion: "Audios/Melody - Esa Diva.mp3",
+        apoyo: "Audios/ZAZ - Cerca de Ti (Mon amour) (lyrics).mp3"
     };
     if (canciones[categoria]){
+        audioElement.pause ();
+        audioElement.currentTime = 0;
         audioElement.src = canciones[categoria];
-        audioElement.play();
+        audioElement.load();
+        audioElement.play().catch (()=>{});
     }
 }
 
@@ -51,7 +54,7 @@ function guardarMensajeEnHistorial(texto, categoria) {
 function mostrarHistorialMensajes() {
     const historial = JSON.parse(localStorage.getItem("historialMensajes")) || [];
     const contenedor = document.getElementById("historial");
-    contenedor.innerHTML = "";
+    contenedor.innerHTML = "<h2>Historial de Mensajes</h2>";
     historial.forEach(mensaje =>{
         const tarjeta = document.createElement("div");
         tarjeta.classList.add("mensaje-historial");
@@ -67,12 +70,16 @@ function mostrarHistorialMensajes() {
 
 function agregarMensajeDestacado(texto, usuario, audioSrc) {
     const contenedor = document.getElementById("mensajesDestacados");
+    contenedor.innerHTML = "<h2> Mensaje de nuestros diamantes</h2>";
     const tarjeta = document.createElement("div");
     tarjeta.classList.add("mensaje-destacado");
     tarjeta.innerHTML = `
      <p><strong>${texto}</strong></p>
      <p><em>Mensaje de usuario: ${usuario}</em></p>
-     <audio autoplay><source src="${audioSrc}" type="audio/mpeg"></audio>
+     <audio controls autoplay>
+     <source src="${audioSrc}" type="audio/mpeg">
+     Tu navegador no soporta el elemento de audio.
+     </audio>
      `;
      contenedor.appendChild(tarjeta);
 }
@@ -105,7 +112,7 @@ document.getElementById("simuladorForm").addEventListener("submit", function(eve
         return;
     }
 
-    if (mensajeTexto.length = 0 || mensajeTexto.length > 5000) {
+    if (mensajeTexto.length === 0 || mensajeTexto.length > 5000) {
         alert("El mensaje debe tener entre 1 y 5000 caracteres.");
         return;
     }
@@ -117,7 +124,7 @@ document.getElementById("simuladorForm").addEventListener("submit", function(eve
     const mensajeFinal = mensajes [tipo][Math.floor(Math.random() * mensajes[tipo].length)];
     mostrarMensajeConZoom (mensajeFinal);
 
-    guardarMensajeEnHistorial(mensajeTexto, tipo);
+    guardarMensajeEnHistorial(mensajeFinal, tipo);
 
     if (compartir) {
         actualizarReproductorMusical(tipo);
@@ -129,9 +136,9 @@ document.getElementById("simuladorForm").addEventListener("submit", function(eve
 
 function seleccionarCancion (categoria) {
     const canciones = {
-        motivacion : "Audios/Sia-Unstoppable.mp3",
-        aceptacion: "Audios/Melody-Esa-Diva.mp3",
-        apoyo: "Audios/ZAZ-Cerca-de-ti.mp3"
+        motivacion : "Audios/Sia - Unstoppable (Official Audio).mp3",
+        aceptacion: "Audios/Melody - Esa Diva.mp3",
+        apoyo: "Audios/ZAZ - Cerca de Ti (Mon amour) (lyrics).mp3"
     };
     return canciones [categoria] || "";
 }
